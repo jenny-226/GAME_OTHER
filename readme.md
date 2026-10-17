@@ -13,13 +13,13 @@
 - 선택: VS Code용 AI 코딩 도구
 
 ### A. AI 코딩 도구로 프로젝트 생성하기
-1. VS Code에서 이 저장소(`GAME_OTHER`) 폴더 자체를 엽니다. **새 하위 폴더를 만들지 않습니다.**
+1. VS Code에서 이 저장소 폴더(이 `readme.md`가 들어 있는 폴더)를 그대로 엽니다. **새 폴더를 만들지 않습니다.**
 2. 이 문서(`readme.md`)는 저장소 최상위(루트)에 그대로 둡니다.
 3. VS Code AI 채팅의 **Agent 모드**에 아래 지시문을 전달합니다.
 
 ```text
 현재 프로젝트의 README.md 전체를 읽고, 그 안에 정의된 THE OTHER ME: 24 HOURS를 실제로 플레이 가능한 Vite 기반 웹 게임으로 구현해줘.
-- 모든 파일은 현재 열려 있는 저장소 루트(README.md가 있는 폴더)에 바로 생성해줘. GAME_OTHER, the-other-me 같은 하위 프로젝트 폴더를 새로 만들거나 저장소를 다시 clone하지 마.
+- 모든 파일은 readme.md가 있는 현재 폴더에 바로 생성해줘. 프로젝트용 새 폴더를 만들거나 저장소를 다시 clone하지 마. (예: index.html은 ./index.html, src는 ./src/)
 - index.html, package.json, src/, data/, public/ 및 tests/ 파일을 실제로 생성하고 import 오류 없이 연결해줘.
 - 원본 게임 기획에 적힌 5개 키보드 미니게임, 4개 챕터, 상태 수치, 선택 분기, 4가지 엔딩을 구현해줘.
 - 임시 화면이나 단순 버튼 시뮬레이션이 아닌 실제로 조작하고 승리/실패할 수 있는 미니게임으로 구현해줘.
@@ -723,11 +723,11 @@ json
 
 ## 8. 폴더 구조
 
-> 아래 구조는 **저장소 루트(`GAME_OTHER/`) 바로 아래**에 만듭니다. 루트 안에 `GAME_OTHER/`나 `the-other-me/` 같은 폴더를 한 번 더 만들지 않습니다.
+> 아래 파일과 폴더는 모두 **`readme.md`가 있는 현재 폴더에 바로** 만듭니다. 프로젝트 전체를 감싸는 새 폴더를 만들지 않습니다.
 
 ```
-GAME_OTHER/   # 저장소 루트 (README.md가 있는 폴더)
-├── README.md
+./            # 현재 폴더 (readme.md가 있는 곳)
+├── readme.md
 ├── index.html
 ├── package.json
 ├── mission01_server_room.html    # 01 잠입 단독 프로토타입
