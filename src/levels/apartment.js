@@ -203,7 +203,7 @@ export function buildApartment(ctx, { night }) {
     const seen = () => ['apt_mirror', 'apt_desk', 'apt_phone'].filter((k) => state.flags[`done_${k}`]).length;
     ctx.interact(door, { label: '현관문 — 출근하기', node: () => (seen() >= 2 ? 'apt_door' : 'apt_door_locked') });
   } else {
-    ctx.interact(door, { label: '현관문', node: 'night_door' });
+    ctx.interact(door, { label: '현관문 — 흔적 찾으러 나가기', node: () => (state.flags.night_searched ? 'night_door_done' : 'night_door') });
   }
 
   // 거울 (서쪽 벽) — 거울에만 비치는 내 몸

@@ -11,7 +11,7 @@ const LEVEL_IDS = ['apartment_day', 'lobby', 'office17', 'apartment_night', 'flo
 describe('story data', () => {
   it('every then/goto/ending points to something real', () => {
     for (const [id, node] of Object.entries(story)) {
-      const fxs = [node.fx, ...(node.choices || []).map((c) => c.fx)].filter(Boolean);
+      const fxs = [node.fx, ...(node.choices || []).map((c) => c.fx), ...Object.values(node.outcomes || {}).map((o) => o.fx)].filter(Boolean);
       if (node.then) expect(story[node.then], `${id}.then`).toBeTruthy();
       for (const c of node.choices || []) if (c.then) expect(story[c.then], `${id} choice then`).toBeTruthy();
       for (const fx of fxs) {
@@ -104,7 +104,6 @@ describe('playthroughs', () => {
     await seq('lobby_gate', pick('권한'));
     expect((await seq('lobby_elevator', pick('17층'))).goto).toBe('office17');
     await seq('off_mira', pick('손목'));
-    await seq('off_door_key');
     await seq('off_cctv', pick('USB'));
     await seq('off_log', pick('사진'));
     expect((await seq('off_1500', pick('미라'))).goto).toBe('apartment_night');

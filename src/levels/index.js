@@ -7,8 +7,8 @@ import { buildCore } from './core.js';
 // 장소 목록: 챕터, 시간, 자아, 진입 시 재생할 스토리 노드, 배경음
 export const LEVELS = {
   apartment_day: {
-    chapter: 'CHAPTER 1 · 내가 남긴 경고',
-    title: '내가 남긴 경고',
+    chapter: 'PROLOGUE · 내 몸에 남겨진 경고',
+    title: '내 몸에 남겨진 경고',
     place: 'Julian의 아파트',
     time: '07:30',
     self: 'day',
@@ -17,7 +17,7 @@ export const LEVELS = {
     build: (ctx) => buildApartment(ctx, { night: false }),
   },
   lobby: {
-    chapter: 'CHAPTER 1 · 내가 남긴 경고',
+    chapter: 'CHAPTER 1 · 낮 — 회사 서버실 잠입',
     title: '루멘 바이오닉스 본사',
     place: '1층 로비',
     time: '08:51',
@@ -27,7 +27,7 @@ export const LEVELS = {
     build: buildLobby,
   },
   office17: {
-    chapter: 'CHAPTER 2 · 사라진 17분',
+    chapter: 'CHAPTER 1 · 낮 — 회사 서버실 잠입',
     title: '사라진 17분',
     place: '17층 · 서버실 B',
     time: '14:40',
@@ -37,8 +37,8 @@ export const LEVELS = {
     build: buildOffice,
   },
   apartment_night: {
-    chapter: 'CHAPTER 2 · 사라진 17분',
-    title: '밤의 나',
+    chapter: 'CHAPTER 2 · 밤 — 사라진 증거 추적',
+    title: '사라진 증거 추적',
     place: 'Julian의 아파트 (밤)',
     time: '23:10',
     self: 'night',
@@ -47,8 +47,8 @@ export const LEVELS = {
     build: (ctx) => buildApartment(ctx, { night: true }),
   },
   floor_zero: {
-    chapter: 'CHAPTER 3 · 세 번째 나',
-    title: '세 번째 나',
+    chapter: 'CHAPTER 3 · 삭제된 기억의 비밀',
+    title: '삭제된 기억의 비밀',
     place: '지하 0층 · PROJECT TRIAD',
     time: '09:02',
     self: 'day',
@@ -57,8 +57,8 @@ export const LEVELS = {
     build: buildFloorZero,
   },
   core: {
-    chapter: 'CHAPTER 4 · 누구를 삭제할 것인가',
-    title: '누구를 삭제할 것인가',
+    chapter: 'CHAPTER 4 · 두 자아의 충돌',
+    title: '두 자아의 충돌',
     place: '코어실',
     time: '09:31',
     self: 'day',

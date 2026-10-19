@@ -59,6 +59,35 @@
         </div>
       </div>
 
+      <!-- Minigame -->
+      <div id="minigame" class="hidden">
+        <div id="mg-frame">
+          <div id="mg-top"><span id="mg-tag"></span><span id="mg-hud"></span></div>
+          <canvas id="mg-canvas"></canvas>
+          <div id="mg-msg"></div>
+          <div id="mg-keys"></div>
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        </div>
+        <div id="mg-intro" class="mg-card">
+          <div class="mg-eyebrow">KEYBOARD MISSION</div>
+          <h2 id="mg-title"></h2>
+          <p id="mg-goal"></p>
+          <ul id="mg-controls"></ul>
+          <p id="mg-diff"></p>
+          <button id="mg-start">Space · 시작</button>
+        </div>
+        <div id="mg-pause" class="mg-card hidden">
+          <h2>일시정지</h2>
+          <div class="menu"><button id="mg-resume">계속하기 (Esc)</button><button id="mg-restart">처음부터 (R)</button></div>
+        </div>
+        <div id="mg-end" class="mg-card hidden">
+          <div id="mg-end-label"></div>
+          <p id="mg-end-sub"></p>
+          <p id="mg-end-msg"></p>
+          <button id="mg-continue">Space · 이야기로 돌아가기</button>
+        </div>
+      </div>
+
       <!-- Fade / chapter card -->
       <div id="fade"><div id="card"><div id="card-chapter"></div><div id="card-title"></div><div id="card-sub"></div></div></div>
 

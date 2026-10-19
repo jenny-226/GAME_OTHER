@@ -72,9 +72,9 @@ export function buildOffice(ctx) {
   readerHit.position.set(0.3, 1.1, -1.3);
   ctx.add(readerHit);
   ctx.interact(readerHit, {
-    label: '서버실 출입 (카드 리더기)',
+    label: '서버실 B 잠입',
     enabled: () => !state.flags.server_open,
-    node: () => (state.flags.server_key ? 'off_door_key' : state.flags.guard_route ? 'off_door_route' : 'off_door_locked'),
+    node: () => 'off_door',
   });
   ctx.tick(() => led.material.emissive.setHex(state.flags.server_open ? 0x5cff9d : 0xff3355));
 

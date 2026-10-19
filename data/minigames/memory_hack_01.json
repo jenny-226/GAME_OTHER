@@ -1,0 +1,19 @@
+{
+  "id": "memory_hack_01",
+  "width": 6,
+  "height": 5,
+  "start": [0, 0],
+  "target": [5, 4],
+  "watch": [[3, 0], [1, 2], [3, 4]],
+  "pathTime": 90,
+  "syncTime": 60,
+  "period": 2.0,
+  "window": 0.32,
+  "cooldown": 0.5,
+  "needHits": 3,
+  "maxStrikes": 2,
+  "difficulty": {
+    "1": { "addWatch": [[2, 0]], "period": 1.6 },
+    "2": { "addWatch": [[2, 0], [4, 2]], "pathTime": 75, "period": 1.6 }
+  }
+}

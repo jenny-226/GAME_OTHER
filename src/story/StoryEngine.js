@@ -29,7 +29,7 @@ export class StoryEngine {
   }
 
   async run(startId) {
-    const result = { goto: null, ending: null };
+    const result = { goto: null, ending: null, minigame: null };
     let id = startId;
     let guard = 0;
     while (id) {
@@ -69,6 +69,7 @@ export class StoryEngine {
     if (fx.event) this.io.event?.(fx.event);
     if (fx.goto) result.goto = fx.goto;
     if (fx.ending) result.ending = fx.ending;
+    if (fx.minigame) result.minigame = fx.minigame;
     this.io.changed?.();
   }
 }

@@ -11,6 +11,8 @@ import { LEVELS } from './levels/index.js';
 import { StoryEngine, visibleLines } from './story/StoryEngine.js';
 import { createState, resolveEnding, EVIDENCE_NAMES } from './state/GameState.js';
 import * as Save from './state/SaveManager.js';
+import { runMinigame } from './minigames/MinigameRunner.js';
+import { minigameDifficulty, applyMinigameResult } from './story/minigameLink.js';
 
 const $ = (s) => document.querySelector(s);
 const sound = new Sound();
@@ -79,12 +81,36 @@ async function runNode(id, { key } = {}) {
   world.releasePointer();
   ui.lookHint(false);
   ui.openDialogue();
-  let result;
+  let result = {};
+  let next = id;
   try {
-    result = await engine().run(id);
+    // 스토리 → (미니게임 → 결과 장면) 을 이어서 재생한다
+    while (next) {
+      result = await engine().run(next);
+      next = null;
+      if (result.minigame) {
+        const node = story[result.minigame];
+        ui.closeDialogue();
+        ui.showHUD(false);
+        sound.ambience(30, { gain: 0.03 });
+        const res = await runMinigame({
+          game: node.game,
+          preset: node.preset,
+          tag: node.tag,
+          difficulty: minigameDifficulty(state, node),
+          sound,
+        });
+        const out = applyMinigameResult(state, node, res);
+        sound.ambience(levelDef.drone[0], { gain: levelDef.drone[1] });
+        ui.showHUD(true);
+        ui.updateHUD(state);
+        ui.notifyChanges(out.changes);
+        ui.openDialogue();
+        next = out.next;
+      }
+    }
   } catch (err) {
     console.error(err);
-    result = {};
   }
   if (key) state.flags[`done_${key}`] = true;
   ui.closeDialogue();

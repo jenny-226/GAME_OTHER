@@ -1,0 +1,54 @@
+{
+  "id": "night_search_01",
+  "areas": {
+    "apartment": {
+      "name": "Julian의 아파트",
+      "map": [
+        "##B###W#####",
+        "#..........#",
+        "#......#J..#",
+        "#..........#",
+        "#..........X",
+        "#..D.......#",
+        "#.........S#",
+        "############"
+      ],
+      "exit": { "to": "alley", "spawn": [1, 3] }
+    },
+    "alley": {
+      "name": "뒷골목 · 편의점 앞",
+      "map": [
+        "#####C########",
+        "#............#",
+        "#..##....##..R",
+        "X............#",
+        "#........T...#",
+        "##############"
+      ],
+      "exit": { "to": "apartment", "spawn": [10, 4] }
+    }
+  },
+  "start": { "area": "apartment", "pos": [5, 4] },
+  "points": [
+    { "id": "ev_usb", "area": "apartment", "char": "J", "name": "의자에 걸린 재킷", "item": "17분 USB", "desc": "라벨에 낮의 내 글씨로 '17분'. 회사 CCTV 사본이다.", "hidden": false },
+    { "id": "ev_bandage", "area": "apartment", "char": "B", "name": "욕실 쓰레기통", "item": "피 묻은 붕대", "desc": "손등 상처를 감았던 붕대. 누군가와 몸싸움을 했다.", "hidden": false },
+    { "id": "ev_receipt", "area": "apartment", "char": "S", "name": "현관 신발장", "item": "새벽 02:51 택시 영수증", "desc": "출발지: LUMEN 본사. 내가 탄 기억이 없는 택시.", "hidden": false },
+    { "id": "ev_badge", "area": "apartment", "char": "D", "name": "침대 밑", "item": "다니엘의 사원증", "desc": "다니엘 한. 왜 이게 내 침대 밑에 있지?", "hidden": true },
+    { "id": "ev_scratch", "area": "apartment", "char": "W", "name": "창틀 긁힌 자국", "item": "손톱으로 새긴 숫자 '0'", "desc": "누가 새겼을까. 낮의 나? 아니면—", "hidden": true },
+    { "id": "ev_cctv_still", "area": "alley", "char": "C", "name": "편의점 점원", "item": "편의점 CCTV 캡처", "desc": "02:49, 초록색 눈의 내가 계산대 카메라를 보고 웃고 있다.", "hidden": false },
+    { "id": "ev_chip_case", "area": "alley", "char": "T", "name": "골목 쓰레기통", "item": "버려진 칩 케이스", "desc": "'TRIAD v3.0 — 이식 후 폐기'. 누군가 버렸다.", "hidden": false },
+    { "id": "ev_drone_log", "area": "alley", "char": "R", "name": "추락한 감시 드론", "item": "드론 메모리", "desc": "매일 밤 23시, 내 창문 촬영 기록 241건.", "hidden": true }
+  ],
+  "drone": { "area": "alley", "path": [[3, 1], [11, 1], [11, 4], [3, 4]], "speed": 2.2, "radius": 1.3, "penalty": 15, "grace": 3 },
+  "time": 180,
+  "sortTime": 45,
+  "investigate": 2,
+  "moveDelay": 0.15,
+  "revealRange": 2,
+  "maxSelect": 3,
+  "thresholds": { "clean": 6, "detected": 3 },
+  "difficulty": {
+    "1": { "time": 150, "droneSpeed": 3.3 },
+    "2": { "time": 120, "droneSpeed": 3.3, "hide": ["ev_usb"] }
+  }
+}

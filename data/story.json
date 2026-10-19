@@ -639,83 +639,6 @@
       }
     ]
   },
-  "off_door_key": {
-    "lines": [
-      {
-        "s": "",
-        "t": "미라의 사원증을 리더기에 댄다. 삑— 초록불."
-      },
-      {
-        "s": "",
-        "t": "유리문이 소리 없이 열린다.",
-        "event": "open_server"
-      }
-    ],
-    "fx": {
-      "flag": "server_open",
-      "objective": "CCTV 단말과 서버 랙 로그를 조사하자"
-    }
-  },
-  "off_door_route": {
-    "lines": [
-      {
-        "s": "",
-        "t": "2시 50분. 로비에서 본 대로, 경비원이 교대하러 자리를 비웠다."
-      },
-      {
-        "s": "",
-        "t": "누군가 문틈에 접어 끼워 둔 종이 덕분에 잠금장치가 걸려 있지 않다."
-      },
-      {
-        "s": "me",
-        "t": "...밤의 나, 너지?",
-        "event": "open_server"
-      }
-    ],
-    "fx": {
-      "flag": "server_open",
-      "trust": 5,
-      "objective": "CCTV 단말과 서버 랙 로그를 조사하자"
-    }
-  },
-  "off_door_locked": {
-    "lines": [
-      {
-        "s": "sys",
-        "t": "[서버실 B — 레벨 3 권한 필요]"
-      }
-    ],
-    "choices": [
-      {
-        "t": "리더기 덮개를 뜯어 강제로 연다.",
-        "fx": {
-          "suspicion": 15,
-          "flag": "server_open",
-          "objective": "CCTV 단말과 서버 랙 로그를 조사하자"
-        },
-        "reply": [
-          {
-            "s": "",
-            "t": "전선을 맞붙이자 불꽃이 튀고, 문이 덜컹 열린다.",
-            "event": "open_server"
-          },
-          {
-            "s": "sys",
-            "t": "[경고: 서버실 B 비정상 개방 기록됨]"
-          }
-        ]
-      },
-      {
-        "t": "일단 물러난다. 다른 방법을 찾자.",
-        "reply": [
-          {
-            "s": "me",
-            "t": "레벨 3 사원증... 근처에 가진 사람이 있을지도."
-          }
-        ]
-      }
-    ]
-  },
   "off_cctv": {
     "lines": [
       {
@@ -971,7 +894,7 @@
       }
     ],
     "fx": {
-      "objective": "밤의 나로서 단서를 확인하자 — 재킷, 노트북, 책상"
+      "objective": "현관문으로 나가 흔적을 찾은 뒤, 책상에서 낮의 나에게 메시지를 남기자"
     }
   },
   "night_jacket": {
@@ -1093,6 +1016,71 @@
       }
     ],
     "choices": [
+      {
+        "t": "'17분 USB를 꼭 열어 봐. 웃고 있는 건 우리가 아니야.'",
+        "cond": {
+          "flag": "sel_ev_usb"
+        },
+        "fx": {
+          "trust": 10,
+          "flag": [
+            "msg_full"
+          ]
+        },
+        "reply": [
+          {
+            "s": "",
+            "t": "『USB 속 17분을 봐. 카메라를 보고 웃는 건 우리가 아니야. 0층에 셋째가 있어.』",
+            "style": "note"
+          }
+        ]
+      },
+      {
+        "t": "창틀에 새겨진 숫자 '0'을 그대로 그려 둔다.",
+        "cond": {
+          "flag": "sel_ev_scratch"
+        },
+        "fx": {
+          "trust": 5,
+          "flag": [
+            "msg_code"
+          ]
+        },
+        "reply": [
+          {
+            "s": "",
+            "t": "『0』 — 그 아래 작은 글씨로: '거울을 믿지 마.'",
+            "style": "note"
+          }
+        ]
+      },
+      {
+        "t": "골목에서 찾은 증거 사진을 메모에 붙인다.",
+        "cond": {
+          "anyFlag": [
+            "sel_ev_badge",
+            "sel_ev_cctv_still",
+            "sel_ev_chip_case",
+            "sel_ev_drone_log",
+            "sel_ev_receipt",
+            "sel_ev_bandage"
+          ]
+        },
+        "fx": {
+          "trust": 10,
+          "suspicion": 5,
+          "flag": [
+            "msg_full"
+          ]
+        },
+        "reply": [
+          {
+            "s": "",
+            "t": "『이게 다 우리 몸이 한 일이야. 우리 둘 다 모르는 사이에. 0층에서 만나.』",
+            "style": "note"
+          }
+        ]
+      },
       {
         "t": "내가 아는 걸 전부 적는다.",
         "fx": {
@@ -1333,39 +1321,22 @@
     ],
     "choices": [
       {
-        "t": "문서를 통째로 다운로드한다.",
+        "t": "기억 관리 시스템에 접속해 삭제된 기억을 복구한다.",
         "fx": {
-          "evidence": "triad_file",
-          "suspicion": 10,
-          "flag": "know_third"
+          "minigame": "mg_hack"
         }
       },
       {
-        "t": "03을 끄는 방법을 찾는다.",
+        "t": "문서만 다운로드한다.",
         "fx": {
-          "flag": [
-            "know_third",
-            "know_core"
-          ],
-          "memory": -5
-        },
-        "reply": [
-          {
-            "s": "",
-            "t": "『03 제거는 코어실에서만 가능. 단, 시스템 규정상 인격 1개 삭제를 동반함.』",
-            "style": "note"
-          },
-          {
-            "s": "me",
-            "t": "하나를 지워야 한다고? 누가 정한 규정인데."
-          }
-        ]
+          "evidence": "triad_file",
+          "suspicion": 10,
+          "flag": "know_third",
+          "objective": "복도 끝 코어실로 가자",
+          "event": "open_core"
+        }
       }
-    ],
-    "fx": {
-      "objective": "복도 끝 코어실로 가자",
-      "event": "open_core"
-    }
+    ]
   },
   "zero_mirror": {
     "lines": [
@@ -1652,11 +1623,22 @@
     "lines": [
       {
         "s": "",
-        "t": "현관 렌즈 너머 복도에 누군가 서 있다. 움직이지도 않고, 문만 보고 있다."
+        "t": "현관 렌즈 너머 복도는 조용하다. 길 건너 옥상엔 드론 불빛이 깜빡인다."
       },
       {
         "s": "me",
-        "t": "지금 나가면 따라붙겠지. 오늘 밤은 여기서 할 일을 하자."
+        "t": "낮의 내가 오늘 어디를 다녀왔는지, 흔적이 남아 있을 거야. 집 안에도, 골목에도."
+      }
+    ],
+    "choices": [
+      {
+        "t": "아파트와 뒷골목을 뒤져 낮의 나가 남긴 흔적을 찾는다.",
+        "fx": {
+          "minigame": "mg_search"
+        }
+      },
+      {
+        "t": "아직은 나가지 않는다."
       }
     ]
   },
@@ -1671,5 +1653,380 @@
         "t": "낮의 나. 넌 오늘 무슨 얼굴로 하루를 보냈어?"
       }
     ]
+  },
+  "off_door": {
+    "lines": [
+      {
+        "s": "",
+        "t": "유리문 너머 서버실 B. 문 앞 복도를 경비원 둘이 순찰하고, 천장 CCTV가 번갈아 켜진다."
+      },
+      {
+        "s": "me",
+        "t": "미라의 사원증이 있다. 들키지 않고 문 앞까지만 가면 돼.",
+        "cond": {
+          "flag": "server_key"
+        }
+      },
+      {
+        "s": "me",
+        "t": "로비에서 외운 경비원 동선이 있다. 교대 시간을 노리자.",
+        "cond": {
+          "flag": "guard_route",
+          "notFlag": "server_key"
+        }
+      },
+      {
+        "s": "me",
+        "t": "권한도 없고, 동선도 모른다. 몸으로 부딪혀 보는 수밖에.",
+        "cond": {
+          "notFlag": [
+            "server_key",
+            "guard_route"
+          ]
+        }
+      }
+    ],
+    "choices": [
+      {
+        "t": "경비원과 CCTV를 피해 서버실로 잠입한다.",
+        "fx": {
+          "minigame": "mg_stealth"
+        }
+      },
+      {
+        "t": "아직은 아니다. 물러난다.",
+        "reply": [
+          {
+            "s": "me",
+            "t": "3시까지 시간이 없어. 오래 망설일 순 없다."
+          }
+        ]
+      }
+    ]
+  },
+  "mg_stealth": {
+    "type": "minigame",
+    "game": "stealth",
+    "preset": "stealth_01",
+    "tag": "MISSION 01 | 17층 서버실 B 잠입",
+    "easierIf": {
+      "anyFlag": [
+        "server_key",
+        "guard_route"
+      ]
+    },
+    "outcomes": {
+      "clean_success": {
+        "fx": {
+          "suspicion": -5
+        },
+        "next": "off_stealth_clean"
+      },
+      "detected_success": {
+        "fx": {
+          "suspicion": 20
+        },
+        "next": "off_stealth_detected"
+      },
+      "fail": {
+        "fx": {
+          "suspicion": 20,
+          "flag": "caught"
+        },
+        "next": "off_stealth_fail"
+      }
+    }
+  },
+  "off_stealth_clean": {
+    "lines": [
+      {
+        "s": "",
+        "t": "아무도 눈치채지 못했다. 서버실 문이 소리 없이 열린다.",
+        "event": "open_server"
+      },
+      {
+        "s": "me",
+        "t": "좋아. 이제 그 17분을 찾자."
+      }
+    ],
+    "fx": {
+      "flag": "server_open",
+      "objective": "CCTV 단말과 서버 랙 로그를 조사하자"
+    }
+  },
+  "off_stealth_detected": {
+    "lines": [
+      {
+        "s": "sys",
+        "t": "[경고: 서버실 B 출입 이상 감지 — 보안팀 확인 예정]"
+      },
+      {
+        "s": "",
+        "t": "문은 열렸다. 하지만 어딘가에 내 이름이 기록됐다.",
+        "event": "open_server"
+      }
+    ],
+    "fx": {
+      "flag": "server_open",
+      "objective": "CCTV 단말과 서버 랙 로그를 조사하자"
+    }
+  },
+  "off_stealth_fail": {
+    "lines": [
+      {
+        "s": "guard",
+        "t": "거기 서요! ...Julian 씨?"
+      },
+      {
+        "s": "guard",
+        "t": "서버실엔 무슨 일로. 보안실로 같이 가시죠."
+      },
+      {
+        "s": "",
+        "t": "보안실 벽면 모니터에 어젯밤 CCTV가 재생되고 있다. 경비원이 전화를 받으러 나간 사이—",
+        "glitch": true
+      }
+    ],
+    "then": "off_cctv_caught"
+  },
+  "off_cctv_caught": {
+    "lines": [
+      {
+        "s": "",
+        "t": "CCTV 보관 단말. 어젯밤 기록 중 02:13부터 02:30까지, 17분이 '삭제됨'으로 표시돼 있다."
+      },
+      {
+        "s": "",
+        "t": "그런데 휴지통 폴더에 같은 길이의 파일 하나가 남아 있다. 재생."
+      },
+      {
+        "s": "",
+        "t": "화면 속의 내가 다니엘 한의 팔을 붙잡고 엘리베이터에 오른다. 다니엘은 잠든 것처럼 축 늘어져 있다.",
+        "glitch": true
+      },
+      {
+        "s": "",
+        "t": "엘리베이터 표시등: 0."
+      },
+      {
+        "s": "",
+        "t": "문이 닫히기 직전, 화면 속의 나는 카메라를 똑바로 올려다보며 웃는다."
+      },
+      {
+        "s": "me",
+        "t": "...난 웃은 기억이 없어. 아니, 저기 간 기억 자체가 없어."
+      }
+    ],
+    "choices": [
+      {
+        "t": "화면을 눈에 새긴다.",
+        "fx": {
+          "flag": "saw_third",
+          "memory": 5
+        },
+        "reply": [
+          {
+            "s": "",
+            "t": "카메라를 올려다보며 웃는 얼굴. 눈동자 안쪽의 초록 고리."
+          }
+        ]
+      },
+      {
+        "t": "휴대폰으로 몰래 찍는다.",
+        "fx": {
+          "evidence": "cctv",
+          "suspicion": 10
+        },
+        "reply": [
+          {
+            "s": "",
+            "t": "찰칵. 손이 떨려 초점이 반쯤 나갔지만, 얼굴은 알아볼 수 있다."
+          }
+        ]
+      }
+    ],
+    "then": "off_1500"
+  },
+  "night_door_done": {
+    "lines": [
+      {
+        "s": "",
+        "t": "현관 렌즈 너머 복도에 누군가 서 있다. 움직이지도 않고, 문만 보고 있다."
+      },
+      {
+        "s": "me",
+        "t": "지금 나가면 따라붙겠지. 오늘 밤은 여기서 할 일을 하자."
+      }
+    ]
+  },
+  "mg_search": {
+    "type": "minigame",
+    "game": "search",
+    "preset": "night_search_01",
+    "tag": "NIGHT 03 | 아파트 · 뒷골목 흔적 추적",
+    "outcomes": {
+      "clean_success": {
+        "fx": {
+          "trust": 10,
+          "flag": "night_searched",
+          "objective": "책상에서 낮의 나에게 메시지를 남기자"
+        },
+        "next": "night_search_clean"
+      },
+      "detected_success": {
+        "fx": {
+          "flag": "night_searched",
+          "objective": "책상에서 낮의 나에게 메시지를 남기자"
+        },
+        "next": "night_search_mid"
+      },
+      "fail": {
+        "fx": {
+          "trust": -10,
+          "flag": "night_searched",
+          "objective": "책상에서 낮의 나에게 메시지를 남기자"
+        },
+        "next": "night_search_fail"
+      }
+    }
+  },
+  "night_search_clean": {
+    "lines": [
+      {
+        "s": "",
+        "t": "현관문을 잠그고 돌아왔다. 주머니가 증거로 묵직하다."
+      },
+      {
+        "s": "me",
+        "t": "낮의 나, 넌 생각보다 많은 걸 남겼구나. 이번엔 내가 전해 줄 차례야."
+      }
+    ]
+  },
+  "night_search_mid": {
+    "lines": [
+      {
+        "s": "",
+        "t": "몇 가지는 찾았지만 시간이 부족했다."
+      },
+      {
+        "s": "me",
+        "t": "이걸로 충분할까. ...충분해야 해."
+      }
+    ]
+  },
+  "night_search_fail": {
+    "lines": [
+      {
+        "s": "",
+        "t": "드론 불빛을 피해 다니느라 거의 아무것도 건지지 못했다."
+      },
+      {
+        "s": "me",
+        "t": "낮의 나에게 뭘 전해 줘야 하지?"
+      }
+    ]
+  },
+  "mg_hack": {
+    "type": "minigame",
+    "game": "hack",
+    "preset": "memory_hack_01",
+    "tag": "HACK 02 | 기억 관리 시스템 접속",
+    "easierIf": {
+      "flag": "locked_03"
+    },
+    "outcomes": {
+      "clean_success": {
+        "fx": {
+          "memory": -10,
+          "evidence": [
+            "triad_file",
+            "hack_memory"
+          ],
+          "flag": [
+            "know_third",
+            "hack_clean"
+          ]
+        },
+        "next": "zero_hack_clean"
+      },
+      "detected_success": {
+        "fx": {
+          "memory": 10,
+          "evidence": "triad_file",
+          "flag": "know_third"
+        },
+        "next": "zero_hack_mid"
+      },
+      "fail": {
+        "fx": {
+          "memory": 20,
+          "flag": "know_third"
+        },
+        "next": "zero_hack_fail"
+      }
+    }
+  },
+  "zero_hack_clean": {
+    "lines": [
+      {
+        "s": "",
+        "t": "삭제됐던 기억이 되살아난다.",
+        "glitch": true
+      },
+      {
+        "s": "",
+        "t": "02:13. 엘리베이터 안. 다니엘이 내 팔을 붙잡고 묻는다. '줄리안, 너 맞아?'"
+      },
+      {
+        "s": "",
+        "t": "내 입이 대답한다. 내 목소리가 아닌 목소리로. 'JULIAN-03, 회수 임무 수행 중.'"
+      },
+      {
+        "s": "me",
+        "t": "...기억났어. 범인은 03이야. 그리고 03은 코어실에서만 지울 수 있어."
+      }
+    ],
+    "fx": {
+      "objective": "복도 끝 코어실로 가자",
+      "event": "open_core"
+    }
+  },
+  "zero_hack_mid": {
+    "lines": [
+      {
+        "s": "",
+        "t": "기억 조각 일부만 돌아왔다. 엘리베이터, 다니엘의 얼굴, 숫자 0."
+      },
+      {
+        "s": "me",
+        "t": "흐릿해도 충분해. 코어실로 가자."
+      }
+    ],
+    "fx": {
+      "objective": "복도 끝 코어실로 가자",
+      "event": "open_core"
+    }
+  },
+  "zero_hack_fail": {
+    "lines": [
+      {
+        "s": "",
+        "t": "접속이 끊기는 순간, 머릿속이 하얗게 타오른다.",
+        "glitch": true
+      },
+      {
+        "s": "",
+        "t": "몇 분이 통째로 사라졌다. 정신을 차리니 손에 출력물 한 장이 쥐어져 있다."
+      },
+      {
+        "s": "",
+        "t": "『03 제거는 코어실에서만 가능』",
+        "style": "note"
+      }
+    ],
+    "fx": {
+      "objective": "복도 끝 코어실로 가자",
+      "event": "open_core"
+    }
   }
 }

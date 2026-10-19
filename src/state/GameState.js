@@ -10,6 +10,15 @@ export const EVIDENCE_NAMES = {
   pod_photo: '캡슐 속 다니엘 사진',
   daniel: '생존자 다니엘의 증언',
   triad_file: 'PROJECT TRIAD 문서',
+  ev_usb: '17분 USB',
+  ev_bandage: '피 묻은 붕대',
+  ev_receipt: '새벽 02:51 택시 영수증',
+  ev_badge: '다니엘의 사원증',
+  ev_scratch: "창틀에 새긴 숫자 '0'",
+  ev_cctv_still: '편의점 CCTV 캡처',
+  ev_chip_case: '버려진 TRIAD 칩 케이스',
+  ev_drone_log: '감시 드론 메모리',
+  hack_memory: '복구된 02:13의 기억',
 };
 
 export function createState() {
