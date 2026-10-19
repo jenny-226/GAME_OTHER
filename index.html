@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>THE OTHER ME</title>
     <link rel="icon" href="data:," />
+    <style>
+      body:not(.booted) #app { display: none; }
+      #boot-help { display: none; position: fixed; inset: 0; background: #05070b; color: #e9eef5; font-family: 'Noto Sans KR', system-ui, sans-serif; padding: 40px max(16px, 6vw); line-height: 1.8; }
+      #boot-help.show { display: block; }
+      #boot-help h1 { font-size: 26px; margin: 0 0 12px; }
+      #boot-help code { background: #12202c; color: #6ee7ff; padding: 2px 8px; border-radius: 4px; font-size: 15px; }
+      #boot-help ol { padding-left: 22px; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -119,6 +127,22 @@
         <button id="touch-act">조사</button>
       </div>
     </div>
+    <div id="boot-help">
+      <h1>게임이 실행되지 않았습니다</h1>
+      <p>이 파일을 더블클릭하거나 Live Server로 열면 게임이 시작되지 않습니다. 아래 순서로 실행해 주세요.</p>
+      <ol>
+        <li>VS Code에서 이 폴더를 열고 터미널을 엽니다 (<code>Ctrl + `</code>).</li>
+        <li>처음 한 번만: <code>npm install</code></li>
+        <li>실행: <code>npm run dev</code></li>
+        <li>터미널에 나온 주소 <code>http://localhost:5173/</code> 를 Chrome에서 엽니다.</li>
+      </ol>
+    </div>
+    <script>
+      // 게임 코드가 시작되지 않으면 실행 방법 안내를 보여준다
+      setTimeout(function () {
+        if (!document.body.classList.contains('booted')) document.getElementById('boot-help').classList.add('show');
+      }, 2500);
+    </script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -1,4 +1,6 @@
 import './style.css';
+
+document.body.classList.add('booted');
 import * as THREE from 'three';
 import story from '../data/story.json';
 import endings from '../data/endings.json';
